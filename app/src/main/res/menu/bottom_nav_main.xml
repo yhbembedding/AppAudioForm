@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/audio"
+        android:title="Audio"
+        android:icon="@drawable/microphone"
+        />
+    <item android:id="@+id/cambien"
+        android:title="CamBien"
+        android:icon="@drawable/cambien"/>
+</menu>
