@@ -1,4 +1,4 @@
-package com.example.audioform;
+package com.example.audioform.Audio;
 
 public class RecordingDTO {
     private int _id;

@@ -1,11 +1,11 @@
-package com.example.audioform.SQL;
+package com.example.audioform.Audio.SQL;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.example.audioform.RecordingDTO;
+import com.example.audioform.Audio.RecordingDTO;
 
 public class RecordingDAO {
     DBHelper dbHelper;

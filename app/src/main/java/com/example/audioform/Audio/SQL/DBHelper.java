@@ -1,4 +1,4 @@
-package com.example.audioform.SQL;
+package com.example.audioform.Audio.SQL;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
