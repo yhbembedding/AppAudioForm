@@ -43,6 +43,8 @@ public class AudioFragment extends Fragment {
     private String fileName, fileNameSensor;
     private String path, pathSensor;
 
+    long start,end;
+
     SensorManager sensorManager;
     Sensor sensor;
     private              float[]  gravity    = new float[]{ 0, 0, 0 };
@@ -115,12 +117,11 @@ public class AudioFragment extends Fragment {
             mediaRecorder = new MediaRecorder();
             mediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
             mediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);
-            mediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AAC);
-
+            mediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AAC_ELD);
+            mediaRecorder.setAudioSamplingRate(48000);
 
             if(state == true){
                 mediaRecorder.setAudioEncodingBitRate(192000);
-                mediaRecorder.setAudioSamplingRate(44100);
             }
             mediaRecorder.setOutputFile(path);
             mediaRecorder.prepare();
@@ -128,7 +129,8 @@ public class AudioFragment extends Fragment {
 
             if(sensor != null){
                 printWriter = new PrintWriter(pathSensor);
-                sensorManager.registerListener(sensorEventListener,sensor,sensorManager.SENSOR_DELAY_NORMAL);
+                start = System.currentTimeMillis();
+                sensorManager.registerListener(sensorEventListener,sensor,10000);
 
                // printWriter.close();
             }
@@ -139,12 +141,17 @@ public class AudioFragment extends Fragment {
     }
 
     public void stopRecording(){
-        chronometer.stop();
-        mediaRecorder.stop();
-        mediaRecorder.release();
-        mediaRecorder = null;
+        try {
+            chronometer.stop();
+            mediaRecorder.stop();
+            mediaRecorder.release();
+            mediaRecorder = null;
 
-        printWriter.close();
+            printWriter.close();
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
         gravity    = new float[]{ 0, 0, 0 };
         String date;
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
@@ -160,8 +167,11 @@ public class AudioFragment extends Fragment {
 
         do{
             count++;
-            fileName = "my_recording_" + (recordingDAO.getCount() + count) + ".mp4";
-            fileNameSensor = "my_recording_" + (recordingDAO.getCount() + count) + ".txt";
+            String date;
+            SimpleDateFormat sdf = new SimpleDateFormat("dd_MM_yy");
+            date = sdf.format(new Date());
+            fileName = "my_recording_" + (recordingDAO.getCount() + count)+ "in_"+ date + ".mp4";
+            fileNameSensor = "my_recording_" + (recordingDAO.getCount() + count) + "in_"+ date + ".txt";
             path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/Recorder/" + fileName;
             pathSensor = Environment.getExternalStorageDirectory().getAbsolutePath() + "/Recorder/" + fileNameSensor;
             file = new File(path);
@@ -182,8 +192,11 @@ public class AudioFragment extends Fragment {
             x = event.values[0] - gravity[0];
             y = event.values[1] - gravity[1];
             z = event.values[2] - gravity[2];
+            end = System.currentTimeMillis();
+            long t = end - start;
+            start = System.currentTimeMillis();
             try {
-                String toado = String.valueOf(x) + " " + String.valueOf(y) + " " + String.valueOf(z) + "\n";
+                String toado =String.valueOf(t)+" "+ String.valueOf(x) + " " + String.valueOf(y) + " " + String.valueOf(z) +  "\n";
                 //printWriter = new PrintWriter(pathSensor);
                 printWriter.write(toado);
             }
