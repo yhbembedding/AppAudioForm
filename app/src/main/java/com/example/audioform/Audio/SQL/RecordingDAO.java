@@ -4,41 +4,45 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.example.audioform.Audio.RecordingDTO;
 
 public class RecordingDAO {
     DBHelper dbHelper;
     Context context;
+
     public RecordingDAO(Context context) {
         dbHelper = new DBHelper(context);
         this.context = context;
     }
 
-    public void addRecording(String name, String path, long length, String date){
+    public void addRecording(String name, String path, long length, String date) {
         SQLiteDatabase database = dbHelper.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(DBHelper.COLUMN_NAME, name);
         contentValues.put(DBHelper.COLUMN_PATH, path);
         contentValues.put(DBHelper.COLUMN_LENGTH, length);
         contentValues.put(DBHelper.COLUMN_DATE, date);
-        long  rowId = database.insert(DBHelper.TABLE_NAME, null, contentValues);
+        long rowId = database.insert(DBHelper.TABLE_NAME, null, contentValues);
+        Log.e("addRecording", "insert id: " + rowId);
     }
 
-    public int getCount(){
+    public int getCount() {
         SQLiteDatabase database = dbHelper.getReadableDatabase();
         String column[] = {DBHelper._ID};
         Cursor cursor = database.query(DBHelper.TABLE_NAME, column, null, null, null, null, null);
         int count = cursor.getCount();
         cursor.close();
+        Log.e("getCount", "count:" + count);
         return count;
     }
 
-    public RecordingDTO getItemAt(int position){
+    public RecordingDTO getItemAt(int position) {
         SQLiteDatabase database = dbHelper.getReadableDatabase();
         String column[] = {DBHelper._ID, DBHelper.COLUMN_NAME, DBHelper.COLUMN_PATH, DBHelper.COLUMN_LENGTH, DBHelper.COLUMN_DATE};
         Cursor cursor = database.query(DBHelper.TABLE_NAME, column, null, null, null, null, null);
-        if(cursor.moveToPosition(position)){
+        if (cursor.moveToPosition(position)) {
             RecordingDTO item = new RecordingDTO();
             item.set_id(cursor.getInt(cursor.getColumnIndex(DBHelper._ID)));
             item.setName(cursor.getString(cursor.getColumnIndex(DBHelper.COLUMN_NAME)));
@@ -51,7 +55,7 @@ public class RecordingDAO {
         return null;
     }
 
-    public void deleteItem(int id){
+    public void deleteItem(int id) {
         SQLiteDatabase database = dbHelper.getWritableDatabase();
         String whereClause = DBHelper._ID + "=?";
         String whereArgs[] = {String.valueOf(id)};
@@ -59,12 +63,12 @@ public class RecordingDAO {
         database.close();
     }
 
-    public void deleteAllItem(){
+    public void deleteAllItem() {
         SQLiteDatabase database = dbHelper.getWritableDatabase();
         database.delete(DBHelper.TABLE_NAME, null, null);
     }
 
-    public void renameItem(int id, String name, String path){
+    public void renameItem(int id, String name, String path) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(DBHelper.COLUMN_NAME, name);

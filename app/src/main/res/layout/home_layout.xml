@@ -1,20 +1,131 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:padding="16dp"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="@dimen/_8sdp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Họ và tên" />
+
+            <EditText
+                android:id="@+id/edHovaten"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Giới Tính" />
+
+            <CheckBox
+                android:id="@+id/cbnam"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:text="Nam" />
+
+            <CheckBox
+                android:id="@+id/cbNu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:text="Nữ" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tuổi" />
+
+            <EditText
+                android:id="@+id/edTuoi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nghề Nghiệp" />
+
+            <EditText
+                android:id="@+id/edNghe"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Địa Chỉ" />
+
+            <EditText
+                android:id="@+id/edDC"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Chuẩn Đoán " />
+
+            <EditText
+                android:id="@+id/edchuandoan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </LinearLayout>
     <FrameLayout
-        android:layout_marginTop="30dp"
-        android:layout_width="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_height="wrap_content">
+        android:layout_width="match_parent"
+        android:layout_height="140dp"
+        android:layout_gravity="center_horizontal">
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:src="@drawable/circle" />
 
         <Chronometer
@@ -23,28 +134,44 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:textColor="#757575"
-            android:textSize="36sp" />
-    </FrameLayout>
+            android:textSize="@dimen/_18sdp" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:gravity="bottom|center"
-        >
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
+        <CheckBox
+            android:id="@+id/checked_test"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:checked="false"
+            android:text="Timer to 30 mins" />
+    </FrameLayout>
+
+
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="bottom|center"
+        android:orientation="vertical"
+        android:paddingTop="@dimen/_16sdp">
+
+
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/btn_record"
-            app:srcCompat="@drawable/ic_mic"
-            app:borderWidth="0dp"
-            app:tint="#fff"
-            app:fabCustomSize="80dp"
-            app:maxImageSize="30dp"
-            app:rippleColor="#fff"
-            android:backgroundTint="@color/colorAccent"
-            android:layout_marginBottom="16dp"
             style="@style/Widget.MaterialComponents.FloatingActionButton"
-            />
-    </LinearLayout>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right"
+            android:layout_margin="@dimen/_26sdp"
+            android:backgroundTint="@color/colorAccent"
+            app:borderWidth="0dp"
+            app:fabCustomSize="@dimen/_80sdp"
+            app:maxImageSize="@dimen/_30sdp"
+            app:rippleColor="#fff"
+            app:srcCompat="@drawable/ic_mic"
+            app:tint="#fff" />
+
+
+    </FrameLayout>
+
 </LinearLayout>

@@ -13,22 +13,13 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <RelativeLayout
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_40sdp"
-                android:background="#F3EDED">
-
-            </RelativeLayout>
-
             <androidx.viewpager.widget.ViewPager
                 android:id="@+id/view_pager"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_above="@id/nav_bottom"
-                android:layout_below="@id/toolbar"
                 android:layout_marginTop="-8dp"
-                android:layout_marginBottom="8dp"></androidx.viewpager.widget.ViewPager>
+                android:layout_marginBottom="8dp"/>
 
             <com.google.android.material.bottomnavigation.BottomNavigationView
                 android:id="@+id/nav_bottom"
